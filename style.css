@@ -1,0 +1,155 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: #16213e;
+  border-bottom: 2px solid #0f3460;
+  z-index: 100;
+  position: relative;
+}
+
+#toolbar h1 {
+  font-size: 18px;
+  margin-right: 20px;
+  color: #e94560;
+}
+
+#toolbar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  background: #0f3460;
+  color: #eee;
+  transition: background 0.2s;
+}
+
+#toolbar button:hover { background: #e94560; }
+
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 56px);
+}
+
+#connections-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+}
+
+#nodes-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
+}
+
+.flow-node {
+  position: absolute;
+  min-width: 180px;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 10px;
+  padding: 0;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.flow-node:active { cursor: grabbing; }
+.flow-node.selected { border-color: #e94560; }
+
+.node-header {
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flow-node.message .node-header { background: #2d6a4f; }
+.flow-node.question .node-header { background: #e76f51; }
+.flow-node.condition .node-header { background: #7209b7; }
+
+.node-header .delete-btn {
+  background: none;
+  border: none;
+  color: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+}
+.node-header .delete-btn:hover { opacity: 1; }
+
+.node-body {
+  padding: 10px 12px;
+  font-size: 13px;
+  min-height: 40px;
+}
+
+.node-body .node-text {
+  background: none;
+  border: 1px solid transparent;
+  color: #eee;
+  width: 100%;
+  font-size: 13px;
+  resize: none;
+  font-family: inherit;
+  outline: none;
+}
+.node-body .node-text:focus { border-color: #0f3460; }
+
+.node-ports {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px 10px;
+}
+
+.port {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0f3460;
+  border: 2px solid #e94560;
+  cursor: crosshair;
+  position: relative;
+}
+
+.port:hover { background: #e94560; }
+.port.input { align-self: flex-start; }
+.port.output { align-self: flex-end; }
+
+.port-label {
+  font-size: 9px;
+  color: #999;
+  position: absolute;
+  white-space: nowrap;
+}
+.port.input .port-label { left: 20px; top: -2px; }
+.port.output .port-label { right: 20px; top: -2px; }
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; }
+.modal.hidden { display: none; }
+.modal-content { background: #16213e; border-radius: 12px; padding: 24px; width: 500px; max-height: 80vh; }
+.modal-content h2 { margin-bottom: 12px; }
+.modal-content textarea { width: 100%; height: 300px; background: #1a1a2e; color: #eee; border: 1px solid #0f3460; border-radius: 6px; padding: 10px; font-family: monospace; font-size: 12px; margin-bottom: 12px; }
+.modal-content button { padding: 8px 20px; border: none; border-radius: 6px; cursor: pointer; background: #0f3460; color: #eee; margin-right: 8px; }
+.modal-content button:hover { background: #e94560; }
