@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Flow Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toolbar">
+    <h1>Flow Builder</h1>
+    <button onclick="addNode('message')">+ Message</button>
+    <button onclick="addNode('question')">+ Question</button>
+    <button onclick="addNode('condition')">+ Condition</button>
+    <button onclick="exportFlow()">Export JSON</button>
+    <button onclick="clearCanvas()">Clear All</button>
+    <button onclick="undo()">Undo (Ctrl+Z)</button>
+  </div>
+  <div id="canvas-container">
+    <canvas id="connections-canvas"></canvas>
+    <div id="nodes-layer"></div>
+  </div>
+  <div id="export-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Exported Flow</h2>
+      <textarea id="export-output" readonly></textarea>
+      <button onclick="copyExport()">Copy</button>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
